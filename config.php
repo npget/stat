@@ -1,7 +1,7 @@
 
 <php
 
-
+public function scan_dir($dir){
 
 if( $listDir = array_diff(scandir($dir), array('..', '.','extra_final'))){
   $c=0;
@@ -11,4 +11,4 @@ $listDir[] =  usort( $stat['atime']);
 echo $stat['atime'];
 }  
 } 
-
+}
