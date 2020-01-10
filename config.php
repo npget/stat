@@ -4,7 +4,7 @@
      //
      
 public function scan_dir_order_by_last_access($dirarray,$dir){
-
+ $btndir=null;$btnfile=null;
 foreach( $dirarray as $val){  if(is_dir($dir.$val)){
 $stat = stat($dir.$val);
 
@@ -17,7 +17,7 @@ array_multisort($arraystat,SORT_DESC);
 var_dump($arraystat);
      
     $c=0;
-        foreach( $listDir as $val){
+        foreach( $dirarray as $val){
           $c++;
        
             if(is_file($dir.$val)){
