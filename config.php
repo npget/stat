@@ -3,35 +3,27 @@
 
      //
      
-public function scan_dir_order_by_last_access($dirarray,$dir){
+public function scan_dir_order_by_last_access($listDir,$dir){
  $btndir=null;$btnfile=null;
-foreach( $dirarray as $val){  if(is_dir($dir.$val)){
-$stat = stat($dir.$val);
+ foreach( $listDir as $val){  if(is_dir($dir.$val)){  $stat = stat($dir.$val);
+                 $arraystat[$val][]=$stat['mtime'];      }    }
+                 
+array_multisort($arraystat,SORT_DESC,$arraystat);
+//var_dump($arraystat);
 
-$arraystat[$val]=$stat['mtime'];
 
-
-} 
-}
-array_multisort($arraystat,SORT_DESC);
-var_dump($arraystat);
-     
-    $c=0;
-        foreach( $dirarray as $val){
-          $c++;
-       
-            if(is_file($dir.$val)){
-$btnfile.=$this->list_file_explorer($dir,$val);
-             }
+  foreach( $arraystat as $val => $key){
+            
              if(is_dir($dir.$val)){
-        
- $btndir.= $this->list_dir_explorer($dir,$arraystat);
              
+       
              
-             }
+              $btndir.= $this->list_dir_explorer($dir, $val); }
+             // SE PASSO dentro val un valore  numerico e solo numerico  
+     // OVVIAMENTE ME LA SCARTA e non mi torna mi ritorna [0]=> int(1578674338)
              
-             
-             } 
+          }
+  var_dump($arraystat);
      
      
      
